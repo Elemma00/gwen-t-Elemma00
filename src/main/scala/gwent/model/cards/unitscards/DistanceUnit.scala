@@ -13,23 +13,22 @@ import gwent.model.cards.{Effect, ICard}
  * @author Elemma00
  */
 
-class DistanceUnit(private val name: String, private var strength: Int) extends ICard {
-
-
+class DistanceUnit(private val name: String, private var strength: Int) extends ICard{
 
   override def effect(): Effect = {
     new Effect
   }
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[DistanceUnit]) {
-      val o = other.asInstanceOf[DistanceUnit]
-      if (this.name == o.name) {
-        if (this.strength == o.strength) {
-          true
+    other match {
+      case o: DistanceUnit =>
+        if (this.name == o.name) {
+          if (this.strength == o.strength) {
+            true
+          } else false
         } else false
-      } else false
-    } else false
+      case _ => false
+    }
 
   }
 

@@ -55,6 +55,7 @@ class PlayerTest extends munit.FunSuite {
       assertEquals(Siegue1, Siegue1)
     }
 
+
     test("equal SiegueUnit values") {
       Siegue2.equals(Siegue3)
     }
