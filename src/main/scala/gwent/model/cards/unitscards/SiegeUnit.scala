@@ -1,39 +1,33 @@
 package cl.uchile.dcc
 package gwent.model.cards.unitscards
 
-import gwent.model.cards.{Effect, ICard}
-
+import gwent.model.cards.effects.AbstractEffect
+import gwent.model.cards.unitscards.AbstractUnitCard
 
 
 /** A class representing a Siege Unit Card
  *
- * a Unit card is defined by its name and strength
  *
- * @param name
- * @param strength
- *
+ * @param name     name of the Siegue Unit
+ * @param strength strength points
+ * @param effect   the effect's card
  * @author Elemma00
  */
 
-class SiegeUnit(private val name: String, private var strength:Int) extends ICard {
+class SiegeUnit(private val name: String, private val strength: Int, private val effect: AbstractEffect)
+  extends AbstractUnitCard(name, strength, effect) {
 
-
-  override def effect(): Effect = {new Effect} 
-  
-  override def equals(other: Any): Boolean = {
-    other match {
-      case o: SiegeUnit =>
-        if (this.name == o.name) {
-          if (this.strength == o.strength) {
-            true
-          } else false
-        } else false
-      case _ => false
+  // override def placeOnTable(/* table:Table */): Unit = {}
+  override def equals(o: Any): Boolean = {
+    if (o.isInstanceOf[SiegeUnit]) {
+      val other = o.asInstanceOf[SiegeUnit]
+      (this eq other) ||
+        other.name == name &&
+          other.strength == strength &&
+          other.effect == effect
+    } else {
+      false
     }
   }
 
-  override def toString: String = {
-    s"name: $name strength: $strength"
-  }
-  
 }

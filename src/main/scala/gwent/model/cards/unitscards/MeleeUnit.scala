@@ -1,40 +1,31 @@
 package cl.uchile.dcc
 package gwent.model.cards.unitscards
 
-import gwent.model.cards.{Effect, ICard}
-
-
+import gwent.model.cards.effects.AbstractEffect
 
 /** A class representing a Melee Unit Card
  *
- * a Unit card is defined by its name and strength
  *
- * @param name
- * @param strength
- *
+ * @param name name of the Melee Unit
+ * @param strength strength points
+ * @param effect the card's effect
  * @author Elemma00
  */
 
 
-class MeleeUnit(private val name: String, private var strength: Int) extends ICard {
-  override def effect(): Effect = {
-    new Effect
-  }
+class MeleeUnit(private val name: String, private val strength: Int, private val effect: AbstractEffect)
+  extends AbstractUnitCard(name, strength, effect) {
 
-  override def equals(other: Any): Boolean = {
-    other match {
-      case o: MeleeUnit =>
-        if (this.name == o.name) {
-          if (this.strength == o.strength) {
-            true
-          } else false
-        } else false
-      case _ => false
+  // override def placeOnTable(/* table:Table */): Unit = {}
+  override def equals(o: Any): Boolean = {
+    if (o.isInstanceOf[MeleeUnit]) {
+      val other = o.asInstanceOf[MeleeUnit]
+      (this eq other) ||
+        other.name == name &&
+          other.strength == strength &&
+          other.effect == effect
+    } else {
+      false
     }
   }
-
-  override def toString: String = {
-    s"name: $name strength: $strength"
-  }
-
 }
