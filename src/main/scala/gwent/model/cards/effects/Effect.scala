@@ -4,7 +4,7 @@ package gwent.model.cards.effects
 /**
  * a trait for effects
  */
-trait TEffect {
+trait Effect {
   //this method apply the effect on game
   def applyEffect(): Unit
 }

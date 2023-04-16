@@ -1,95 +1,67 @@
 package cl.uchile.dcc
 package test
 
+import gwent.model.cards.ICard
+import gwent.model.cards.deck.Deck
+import gwent.model.cards.effects.uniteffect.NullEffectUnit
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
 import gwent.model.player.Players
 
-import scala.collection.mutable.ListBuffer
 
 class PlayerTest extends munit.FunSuite {
 
   var player1: Players = _
   var player2: Players = _
   var player3: Players = _
-  var Siegue1: SiegeUnit = _
-  var Siegue2: SiegeUnit = _
-  var Siegue3: SiegeUnit = _
-  var Distance1: DistanceUnit = _
-  var Distance2: DistanceUnit = _
-  var Distance3: DistanceUnit = _
-  var Melee1: MeleeUnit = _
-  var Melee2: MeleeUnit = _
-  var Melee3: MeleeUnit = _
+  var deck1: Deck = _
+  var deck2: Deck = _
+  var siegue1: SiegeUnit = _
+  var distanceUnit1: DistanceUnit = _
+  var meleeGenerico1: MeleeUnit = _
+  var meleeGenerico2: MeleeUnit = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player1 = new Players("nombrexd", 2)
-    player2 = new Players("player2", 2)
-    player3 = new Players("player2", 2)
+    siegue1 = new SiegeUnit("SiegeGenerico", 10, NullEffectUnit)
+    distanceUnit1 = new DistanceUnit("DistanceGenerico", 10, NullEffectUnit)
+    meleeGenerico1 = new MeleeUnit("MeleeGenerico1", 20, NullEffectUnit)
+    meleeGenerico2 = new MeleeUnit("MeleeGenerico2", 20, NullEffectUnit)
 
-    Siegue1 = new SiegeUnit("siegue1", 5)
-    Siegue2 = new SiegeUnit("siegue2", 5)
-    Siegue3 = new SiegeUnit("siegue2", 5)
-
-    Distance1 = new DistanceUnit("Distance1", 3)
-    Distance2 = new DistanceUnit("Distance2", 6)
-    Distance3 = new DistanceUnit("Distance2", 6)
-
-    Melee1 = new MeleeUnit("Melee1", 8)
-    Melee2 = new MeleeUnit("Melee2", 5)
-    Melee3 = new MeleeUnit("Melee2", 5)
+    var lista1: List[ICard] = List(siegue1, distanceUnit1)
+    var lista2: List[ICard] = List(meleeGenerico1, meleeGenerico2)
 
 
-    test("equal player addresses") {
-      assertEquals(player2, player2)
-    }
+    deck1 = new Deck(lista1)
+    deck2 = new Deck(lista2)
 
-    test("equal player values") {
-      player2.equals(player3)
-    }
-
-    test("not equal player values") {
-      player2.equals(player1)
-    }
-
-    test("equal SiegueUnit addresses") {
-      assertEquals(Siegue1, Siegue1)
-    }
-
-
-    test("equal SiegueUnit values") {
-      Siegue2.equals(Siegue3)
-    }
-
-    test("not equal SiegueUnit values") {
-      Siegue1.equals(Siegue3)
-    }
-
-    test("equal DistanceUnit addresses") {
-      assertEquals(Distance1, Distance1)
-    }
-
-    test("equal DistanceUnit values") {
-      Distance2.equals(Distance3)
-    }
-
-    test("not equal DistanceUnit values") {
-      Distance1.equals(Distance3)
-    }
-
-    test("equal MeleeUnit addresses") {
-      assertEquals(Melee1, Melee1)
-    }
-
-    test("equal MeleeUnit values") {
-      Melee2.equals(Melee3)
-    }
-
-    test("not equal MeleeUnit values") {
-      Melee1.equals(Melee3)
-    }
-
+    player1 = new Players("nombrexd", 2, deck1)
+    player2 = new Players("player2", 2, deck2)
+    player3 = new Players("player2", 2, deck2)
 
   }
 
 
+  test("equal player addresses") {
+    assertEquals(player2.equals(player3), true)
+  }
+
+  test("equal player values") {
+    assertEquals(player2.equals(player3), true)
+  }
+
+  test("not equal player values") {
+    player2.equals(player1)
+  }
+
+
+  test("drawing a card") {
+    assertEquals(distanceUnit1.equals(player1.getDeck.draw()), true)
+  }
+  test("showing the cards in the hand of a player"){
+    player1.drawCard()
+    player1.getOnHandCards.showcards()
+  }
+
+  test("showing the deck of a player"){
+    player1.getDeck.showcards()
+  }
 }

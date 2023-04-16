@@ -1,7 +1,10 @@
 package cl.uchile.dcc
 package gwent.model.cards.unitscards
 
-import gwent.model.cards.effects.AbstractEffect
+import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
+import gwent.model.cards.unitscards.AbstractUnitCard
+
+import java.util.Objects
 
 /** A class representing a Melee Unit Card
  *
@@ -13,7 +16,7 @@ import gwent.model.cards.effects.AbstractEffect
  */
 
 
-class MeleeUnit(private val name: String, private val strength: Int, private val effect: AbstractEffect)
+class MeleeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
 
   // override def placeOnTable(/* table:Table */): Unit = {}
@@ -21,11 +24,15 @@ class MeleeUnit(private val name: String, private val strength: Int, private val
     if (o.isInstanceOf[MeleeUnit]) {
       val other = o.asInstanceOf[MeleeUnit]
       (this eq other) ||
-        other.name == name &&
-          other.strength == strength &&
-          other.effect == effect
+        other.getName == name &&
+          other.getStrength == strength &&
+          other.getEffect == effect
     } else {
       false
     }
+  }
+
+  override def hashCode(): Int = {
+    Objects.hash(classOf[MeleeUnit], name, strength, effect)
   }
 }

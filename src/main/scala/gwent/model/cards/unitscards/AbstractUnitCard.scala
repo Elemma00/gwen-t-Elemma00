@@ -2,7 +2,9 @@ package cl.uchile.dcc
 package gwent.model.cards.unitscards
 
 import gwent.model.cards.ICard
-import gwent.model.cards.effects.AbstractEffect
+import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
+
+import java.util.Objects
 
 /** An abstract class representing a Unit Card
  *
@@ -15,19 +17,24 @@ import gwent.model.cards.effects.AbstractEffect
  */
 
 
-abstract class AbstractUnitCard (private val name: String, private val strength: Int, private val effect: AbstractEffect)
+abstract class AbstractUnitCard (private val name: String, private val strength: Int, private val effect: AbstractEffectUnit)
   extends ICard {
 
   // getter methods
-  def getName: String = name
+  override def getName: String = name
   def getStrength: Int = strength
-  def getEffect: AbstractEffect = effect
+  def getEffect: AbstractEffectUnit = effect
+
 
   // this method calls the effect to apply it-self
   override def applyCardEffect(): Unit = {
     effect.applyEffect()
   }
 
+  override def play(): Unit = {
+    //placeOnTable()
+    applyCardEffect()
+  }
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[AbstractUnitCard]) {
       val other = o.asInstanceOf[AbstractUnitCard]
@@ -38,6 +45,10 @@ abstract class AbstractUnitCard (private val name: String, private val strength:
     } else {
       false
     }
+  }
+
+  override def hashCode(): Int = {
+    Objects.hash(classOf[AbstractUnitCard], name, strength,effect)
   }
 
   override def toString: String = {

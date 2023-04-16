@@ -1,8 +1,10 @@
 package cl.uchile.dcc
 package gwent.model.cards.weathercards
 
-import gwent.model.cards.effects.AbstractEffect
 import gwent.model.cards.ICard
+import gwent.model.cards.effects.weathereffect.AbstractEffectWeather
+
+import java.util.Objects
 
 
 /**
@@ -11,11 +13,10 @@ import gwent.model.cards.ICard
  * @param name name of the card
  * @param effect the card's effect
  */
-abstract class AbstractWeatherCard(private val name: String, private val effect: AbstractEffect) extends ICard{
+abstract class AbstractWeatherCard(private val name: String, private val effect: AbstractEffectWeather) extends ICard{
 
-  def getName: String = name
-  def getEffect: AbstractEffect = effect
-
+  override def getName: String = name
+  def getEffect: AbstractEffectWeather = effect
 
 // override def placeOnTable(/* table:Table */): Unit = {}
 
@@ -23,6 +24,10 @@ abstract class AbstractWeatherCard(private val name: String, private val effect:
     effect.applyEffect()
   }
 
+  override def play(): Unit = {
+    //placeOnTable()
+    applyCardEffect()
+  }
   override def toString: String = {
     s"name: $name strength: ${effect.getName}"
   }
@@ -36,6 +41,10 @@ abstract class AbstractWeatherCard(private val name: String, private val effect:
     } else{
       false
     }
+  }
+
+  override def hashCode(): Int = {
+    Objects.hash(classOf[AbstractWeatherCard],name,effect)
   }
 
 

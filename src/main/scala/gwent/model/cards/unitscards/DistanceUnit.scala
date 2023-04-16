@@ -3,8 +3,10 @@ package gwent.model.cards.unitscards
 
 
 import gwent.model.cards.ICard
-import gwent.model.cards.effects.AbstractEffect
+import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 import gwent.model.cards.unitscards.AbstractUnitCard
+
+import java.util.Objects
 
 /** A class representing a Distance Unit Card
  *
@@ -15,7 +17,7 @@ import gwent.model.cards.unitscards.AbstractUnitCard
  * @author Elemma00
  */
 
-class DistanceUnit(private val name: String, private var strength: Int, private var effect: AbstractEffect)
+class DistanceUnit (name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
 
   // override def placeOnTable(/* table:Table */): Unit = {}
@@ -23,12 +25,16 @@ class DistanceUnit(private val name: String, private var strength: Int, private 
     if (o.isInstanceOf[DistanceUnit]) {
       val other = o.asInstanceOf[DistanceUnit]
       (this eq other) ||
-        other.name == name &&
-          other.strength == strength &&
-          other.effect == effect
+        other.getName == name &&
+          other.getStrength == strength &&
+          other.getEffect == effect
     } else {
       false
     }
+  }
+
+  override def hashCode(): Int = {
+    Objects.hash(classOf[DistanceUnit], name, strength, effect)
   }
 
 }
