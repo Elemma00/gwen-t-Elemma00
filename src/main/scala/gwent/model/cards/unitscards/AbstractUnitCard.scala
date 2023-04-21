@@ -17,40 +17,19 @@ import java.util.Objects
  */
 
 
-abstract class AbstractUnitCard (private val name: String, private val strength: Int, private val effect: AbstractEffectUnit)
+abstract class AbstractUnitCard (protected val name: String, protected val strength: Int, protected val effect: AbstractEffectUnit)
   extends ICard {
-
-  // getter methods
-  override def getName: String = name
-  def getStrength: Int = strength
-  def getEffect: AbstractEffectUnit = effect
-
+  
 
   // this method calls the effect to apply it-self
   override def applyCardEffect(): Unit = {
     effect.applyEffect()
   }
 
-  override def play(): Unit = {
+  override def play(/* posicion en tabla: Int */): Unit = {
     //placeOnTable()
     applyCardEffect()
   }
-  override def equals(o: Any): Boolean = {
-    if (o.isInstanceOf[AbstractUnitCard]) {
-      val other = o.asInstanceOf[AbstractUnitCard]
-      (this eq other) ||
-        other.name == name &&
-          other.effect == effect &&
-          other.strength == strength
-    } else {
-      false
-    }
-  }
-
-  override def hashCode(): Int = {
-    Objects.hash(classOf[AbstractUnitCard], name, strength,effect)
-  }
-
   override def toString: String = {
     s"name: $name strength: $strength effect: ${effect.getName}"
   }

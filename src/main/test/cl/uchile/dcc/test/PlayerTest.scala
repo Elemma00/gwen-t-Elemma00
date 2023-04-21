@@ -26,9 +26,8 @@ class PlayerTest extends munit.FunSuite {
     meleeGenerico1 = new MeleeUnit("MeleeGenerico1", 20, NullEffectUnit)
     meleeGenerico2 = new MeleeUnit("MeleeGenerico2", 20, NullEffectUnit)
 
-    var lista1: List[ICard] = List(siegue1, distanceUnit1)
-    var lista2: List[ICard] = List(meleeGenerico1, meleeGenerico2)
-
+    val lista1: List[ICard] = List(siegue1, distanceUnit1)
+    val lista2: List[ICard] = List(meleeGenerico1, meleeGenerico2)
 
     deck1 = new Deck(lista1)
     deck2 = new Deck(lista2)
@@ -53,15 +52,40 @@ class PlayerTest extends munit.FunSuite {
   }
 
 
-  test("drawing a card") {
-    assertEquals(distanceUnit1.equals(player1.getDeck.draw()), true)
-  }
-  test("showing the cards in the hand of a player"){
+  test("drawing a card and play") {
+    println("At this moment the player has no card on hands")
+    player1.showHandCards()
+    println("Now the player will draw a card from his deck")
     player1.drawCard()
-    player1.getOnHandCards.showcards()
+    player1.showHandCards()
+    player1.playCard(0)
   }
 
-  test("showing the deck of a player"){
-    player1.getDeck.showcards()
+  test("hash code for players") {
+    player2.hashCode()
   }
+  test("showing the cards in the hand of a player") {
+    player1.drawCard()
+    player1.showHandCards()
+  }
+
+  test("showing the deck of a player") {
+    player1.showMyDeck()
+  }
+
+  test("shuffling the deck") {
+    println("deck sin barajar")
+    player1.showMyDeck()
+    player1.shuffleDeck()
+    println("ya barajamos ")
+    player1.showMyDeck()
+  }
+  test("append a card on deck"){
+    deck1.append(siegue1)
+  }
+
+  test("comparing deck 1 and deck 2"){
+   assertEquals(deck1.equals(deck2),false)
+  }
+
 }

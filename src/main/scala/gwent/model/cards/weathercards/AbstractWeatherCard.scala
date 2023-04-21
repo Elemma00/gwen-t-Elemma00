@@ -14,10 +14,6 @@ import java.util.Objects
  * @param effect the card's effect
  */
 abstract class AbstractWeatherCard(private val name: String, private val effect: AbstractEffectWeather) extends ICard{
-
-  override def getName: String = name
-  def getEffect: AbstractEffectWeather = effect
-
 // override def placeOnTable(/* table:Table */): Unit = {}
 
   override def applyCardEffect(): Unit = {
@@ -29,7 +25,7 @@ abstract class AbstractWeatherCard(private val name: String, private val effect:
     applyCardEffect()
   }
   override def toString: String = {
-    s"name: $name strength: ${effect.getName}"
+    s"name: $name effect: ${effect.toString()}"
   }
 
   override def equals(o: Any): Boolean = {

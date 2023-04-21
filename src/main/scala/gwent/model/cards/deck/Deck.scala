@@ -13,10 +13,11 @@ class Deck(private var list: List[ICard]) {
     list = nuevaLista
   }
   def showcards(): Unit ={
-    for (elemento <- list) {
-      println(elemento.toString)
+    for ((elemento, indice) <- list.zipWithIndex) {
+      println(s"Nro $indice: ${elemento.toString}")
     }
   }
+
   def suffle(): Unit = {
     list = Random.shuffle(list)
   }

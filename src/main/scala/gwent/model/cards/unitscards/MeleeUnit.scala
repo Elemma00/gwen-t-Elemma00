@@ -24,9 +24,9 @@ class MeleeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
     if (o.isInstanceOf[MeleeUnit]) {
       val other = o.asInstanceOf[MeleeUnit]
       (this eq other) ||
-        other.getName == name &&
-          other.getStrength == strength &&
-          other.getEffect == effect
+        other.name == name &&
+          other.effect == effect &&
+          other.strength == strength
     } else {
       false
     }

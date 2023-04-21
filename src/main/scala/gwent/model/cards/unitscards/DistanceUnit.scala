@@ -19,15 +19,16 @@ import java.util.Objects
 
 class DistanceUnit (name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
-
+  
   // override def placeOnTable(/* table:Table */): Unit = {}
+  
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[DistanceUnit]) {
       val other = o.asInstanceOf[DistanceUnit]
       (this eq other) ||
-        other.getName == name &&
-          other.getStrength == strength &&
-          other.getEffect == effect
+        other.name == name &&
+          other.effect == effect &&
+          other.strength == strength
     } else {
       false
     }
@@ -36,5 +37,5 @@ class DistanceUnit (name: String, strength: Int, effect: AbstractEffectUnit)
   override def hashCode(): Int = {
     Objects.hash(classOf[DistanceUnit], name, strength, effect)
   }
-
+  
 }

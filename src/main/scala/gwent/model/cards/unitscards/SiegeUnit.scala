@@ -9,7 +9,6 @@ import java.util.Objects
 
 /** A class representing a Siege Unit Card
  *
- *
  * @param name     name of the Siegue Unit
  * @param strength strength points
  * @param effect   the effect's card
@@ -24,9 +23,9 @@ class SiegeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
     if (o.isInstanceOf[SiegeUnit]) {
       val other = o.asInstanceOf[SiegeUnit]
       (this eq other) ||
-        other.getName == name &&
-          other.getStrength == strength &&
-          other.getEffect == effect
+        other.name == name &&
+          other.effect == effect &&
+          other.strength == strength
     } else {
       false
     }

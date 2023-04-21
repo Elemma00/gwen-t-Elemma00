@@ -18,7 +18,7 @@ import java.util.Objects
  *
  */
 
-class Players(private val name: String, private var gems: Int, private val deck: Deck) {
+class Players(val name: String, var gems: Int, private val deck: Deck) {
 
   // a list of cards that the user have in hand
   private var onHandCards = new Deck(List.empty[ICard])
@@ -27,10 +27,16 @@ class Players(private val name: String, private var gems: Int, private val deck:
     onHandCards.showcards()
   }
 
+  def showMyDeck(): Unit = {
+    deck.showcards()
+  }
+
   // this method is for play a card
-  def playCard(cardPlayed: ICard): Unit = {
-    onHandCards.setList(onHandCards.getList.filter(_ != cardPlayed))
-    cardPlayed.applyCardEffect()
+  def playCard(indexCard: Int): Unit = {
+    var listadisponible = onHandCards.getList
+    var cardPlayed = listadisponible.apply(indexCard)
+    onHandCards.setList(onHandCards.getList.filter(_ != cardPlayed)) // actualizo las cartas en mi mano
+    cardPlayed.play()
   }
 
   // draw a card of the deck and put in on hand
@@ -39,6 +45,10 @@ class Players(private val name: String, private var gems: Int, private val deck:
     onHandCards.setList(onHandCards.getList :+ drawCard)
   }
 
+  def shuffleDeck():Unit={
+    deck.suffle()
+  }
+  
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[Players]) {
       val other = o.asInstanceOf[Players]
@@ -55,13 +65,5 @@ class Players(private val name: String, private var gems: Int, private val deck:
     Objects.hash(classOf[Players], name, gems, deck)
   }
 
-
-  def getName: String = name
-
-  def getGems: Int = gems
-
-  def getDeck: Deck = deck
-
-  def getOnHandCards: Deck = onHandCards
 
 }

@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package test
 
 import gwent.model.cards.effects.uniteffect.{NullEffectUnit, RefuerzoMoral, VinculoEstrecho}
-import gwent.model.cards.effects.weathereffect.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
+import gwent.model.cards.effects.weathereffect.{ClimaDespejadoEffect, EscarchaMordienteEffect, LluviaTorrencialEffect, NieblaImpenetrableEffect}
 
 class EffectTest extends munit.FunSuite {
 
@@ -10,14 +10,46 @@ class EffectTest extends munit.FunSuite {
     assert(NullEffectUnit.equals(NullEffectUnit))
     assert(RefuerzoMoral.equals(RefuerzoMoral))
     assert(VinculoEstrecho.equals(VinculoEstrecho))
-
-    assert(ClimaDespejado.equals(ClimaDespejado))
-    assert(EscarchaMordiente.equals(EscarchaMordiente))
-    assert(LluviaTorrencial.equals(LluviaTorrencial))
-    assert(NieblaImpenetrable.equals(NieblaImpenetrable))
+    assert(ClimaDespejadoEffect.equals(ClimaDespejadoEffect))
+    assert(EscarchaMordienteEffect.equals(EscarchaMordienteEffect))
+    assert(LluviaTorrencialEffect.equals(LluviaTorrencialEffect))
+    assert(NieblaImpenetrableEffect.equals(NieblaImpenetrableEffect))
   }
 
-  test("comparing two effect that are not equal"){
+  test("to string of every effect"){
+    NullEffectUnit.toString
+    RefuerzoMoral.toString
+    VinculoEstrecho.toString
+    ClimaDespejadoEffect.toString()
+    EscarchaMordienteEffect.toString()
+    LluviaTorrencialEffect.toString()
+    NieblaImpenetrableEffect.toString()
+  }
+
+  test("comparing two weather effects that are not equal") {
+    assertEquals(EscarchaMordienteEffect.equals(LluviaTorrencialEffect), false)
+  }
+
+  test("comparing two effect that are not equal") {
+    assertEquals(NullEffectUnit.equals(NieblaImpenetrableEffect), false)
+  }
+  test("comparing two unit effect  that are not equal"){
     assertEquals(NullEffectUnit.equals(RefuerzoMoral), false)
   }
+
+  test("hashCoding"){
+    NullEffectUnit.hashCode()
+    ClimaDespejadoEffect.hashCode()
+   }
+  
+  test("apply all effects"){
+    ClimaDespejadoEffect.applyEffect()
+    EscarchaMordienteEffect.applyEffect()
+    LluviaTorrencialEffect.applyEffect()
+    NieblaImpenetrableEffect.applyEffect()
+    NullEffectUnit.applyEffect()
+    RefuerzoMoral.applyEffect()
+    VinculoEstrecho.applyEffect()
+  }
+
 }

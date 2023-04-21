@@ -7,9 +7,7 @@ package gwent.model.cards
 trait ICard{
     def applyCardEffect():Unit
     def play():Unit
-    def getName:String
     
-
     //def placeOnTable(table:Table):Unit
 }
 
