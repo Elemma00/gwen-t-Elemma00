@@ -13,7 +13,7 @@ import java.util.Objects
  * @param name name of the card
  * @param effect the card's effect
  */
-abstract class AbstractWeatherCard(private val name: String, private val effect: AbstractEffectWeather) extends ICard{
+abstract class AbstractWeatherCard(val name: String, private val effect: AbstractEffectWeather) extends ICard{
 // override def placeOnTable(/* table:Table */): Unit = {}
 
   override def applyCardEffect(): Unit = {

@@ -13,7 +13,7 @@ import java.util.Objects
  * I use this abstract class in addition to the singleton pattern design because
  * in that way we have a extensible class if we want more effects in new updates
  */
-abstract class AbstractEffectUnit(private val name: String) extends Effect {
+abstract class AbstractEffectUnit(val name: String) extends Effect {
   def getName: String = name
   
   override def equals(o: Any): Boolean = {

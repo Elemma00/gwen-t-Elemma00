@@ -17,7 +17,7 @@ import java.util.Objects
  */
 
 
-abstract class AbstractUnitCard (protected val name: String, protected val strength: Int, protected val effect: AbstractEffectUnit)
+abstract class AbstractUnitCard (val name: String, val strength: Int, protected val effect: AbstractEffectUnit)
   extends ICard {
   
 
