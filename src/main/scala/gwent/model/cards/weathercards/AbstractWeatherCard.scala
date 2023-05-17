@@ -3,6 +3,7 @@ package gwent.model.cards.weathercards
 
 import gwent.model.cards.ICard
 import gwent.model.cards.effects.weathereffect.AbstractEffectWeather
+import gwent.model.table.PlayerTable
 
 import java.util.Objects
 
@@ -14,8 +15,9 @@ import java.util.Objects
  * @param effect the card's effect
  */
 abstract class AbstractWeatherCard(val name: String, private val effect: AbstractEffectWeather) extends ICard{
-// override def placeOnTable(/* table:Table */): Unit = {}
-
+  override def placeOnTable(table: PlayerTable): Unit = {
+    table.setCardWeather(this)
+  }
   override def applyCardEffect(): Unit = {
     effect.applyEffect()
   }
