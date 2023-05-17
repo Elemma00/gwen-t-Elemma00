@@ -4,6 +4,8 @@ package gwent.model.cards.unitscards
 import gwent.model.cards.ICard
 import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 
+import cl.uchile.dcc.gwent.model.table.PlayerTable
+
 import java.util.Objects
 
 /** An abstract class representing a Unit Card
@@ -20,8 +22,8 @@ import java.util.Objects
 abstract class AbstractUnitCard (val name: String, val strength: Int, protected val effect: AbstractEffectUnit)
   extends ICard {
   
-
-  // this method calls the effect to apply it-self
+  
+  // this method calls the effect to apply it-self (single-dispatch)
   override def applyCardEffect(): Unit = {
     effect.applyEffect()
   }

@@ -3,6 +3,7 @@ package gwent.model.cards.unitscards
 
 import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 import gwent.model.cards.unitscards.AbstractUnitCard
+import gwent.model.table.PlayerTable
 
 import java.util.Objects
 
@@ -19,7 +20,10 @@ import java.util.Objects
 class MeleeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
 
-  // override def placeOnTable(/* table:Table */): Unit = {}
+  override def placeOnTable(table: PlayerTable): Unit = {
+    table.setCardOnMeleeZone(this)
+  }
+
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[MeleeUnit]) {
       val other = o.asInstanceOf[MeleeUnit]
