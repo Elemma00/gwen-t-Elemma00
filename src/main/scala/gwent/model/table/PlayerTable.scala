@@ -8,15 +8,14 @@ import gwent.model.player.Players
 import gwent.model.table.GeneralTable
 import java.util.Objects
 
-import scala.collection.mutable.ListBuffer
 
 class PlayerTable(){
 
 
   // Campo para el jugador
-  protected var siegueZone = ListBuffer.empty[ICard]
-  protected var distanceZone = ListBuffer.empty[ICard]
-  protected var meleeZone = ListBuffer.empty[ICard]
+  protected var siegueZone = List.empty[ICard]
+  protected var distanceZone = List.empty[ICard]
+  protected var meleeZone = List.empty[ICard]
   protected var asociatedTable: GeneralTable = _
 
   def start(generalTable: GeneralTable) : Unit = {
@@ -29,15 +28,15 @@ class PlayerTable(){
   }
 
   def setCardOnSiegueZone(card: SiegeUnit) : Unit = {
-     siegueZone += card
+     siegueZone = siegueZone :+ card
   }
   
   def setCardOnDistanceZone(card: DistanceUnit): Unit = {
-    distanceZone += card
+    distanceZone = distanceZone :+ card
   }
   
   def setCardOnMeleeZone(card: MeleeUnit): Unit = {
-    meleeZone += card
+    meleeZone = meleeZone :+ card
   }
 
   def setCardWeather(card: AbstractWeatherCard): Unit = {
