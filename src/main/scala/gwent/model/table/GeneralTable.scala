@@ -31,7 +31,7 @@ class GeneralTable(val tablePlayer1: PlayerTable, val tablePlayer2: PlayerTable)
   }
 
   override def hashCode(): Int = {
-    Objects.hash(classOf[PlayerTable],tablePlayer1,tablePlayer2)
+    Objects.hash(tablePlayer1,tablePlayer2)
   }
 
 

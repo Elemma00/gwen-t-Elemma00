@@ -4,6 +4,8 @@ package gwent.model.player
 import gwent.model.cards.ICard
 import gwent.model.cards.deck.Deck
 
+import cl.uchile.dcc.gwent.exceptions.InvalidGemsAmount
+
 import java.util.Objects
 
 
@@ -19,9 +21,19 @@ import java.util.Objects
  */
 
 class Players(val name: String, var gems: Int, private val deck: Deck) {
+  
+    try {
+      if (gems < 0) {
+        throw new InvalidGemsAmount("El numero de gemas no puede inicializado negativo")
+      }
+    }
 
   // a list of cards that the user have in hand
   private var onHandCards = new Deck(List.empty[ICard])
+
+  def isAlive(): Boolean = {
+     gems > 0
+  }
 
   def showHandCards(): Unit = {
     onHandCards.showcards()

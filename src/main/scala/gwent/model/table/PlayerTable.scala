@@ -10,34 +10,51 @@ import java.util.Objects
 
 import scala.collection.mutable.ListBuffer
 
+
+/**
+ * This class represents one side of the board that will be assigned to a single player.
+ * siegueZone: An inmutable list containing siegue Units
+ * distanceZone : An inmutable list containing distance Units
+ * meleeZone : An inmutable list containing melee Units
+ * asociatedTable : the General table that contains two playerTables
+ */
+
 class PlayerTable(){
-
-
   // Campo para el jugador
-  protected var siegueZone = ListBuffer.empty[ICard]
-  protected var distanceZone = ListBuffer.empty[ICard]
-  protected var meleeZone = ListBuffer.empty[ICard]
+  private var siegueZone = List.empty[SiegeUnit]
+  private var distanceZone = List.empty[DistanceUnit]
+  protected var meleeZone = List.empty[MeleeUnit]
   protected var asociatedTable: GeneralTable = _
 
   def start(generalTable: GeneralTable) : Unit = {
     asociatedTable = generalTable
   }
 
+  def getSieugeZone = siegueZone
+  
+  def getDistanceZone = distanceZone
+  
+  def getMeleeZone = meleeZone
+  
+  
   //Método para colocar una carta en el campo del player (double dispatch)
   def setCardOnTable(card:ICard): Unit = {
      card.placeOnTable(this)
   }
 
   def setCardOnSiegueZone(card: SiegeUnit) : Unit = {
-     siegueZone += card
+    //En este caso, se crea una nueva lista siegueZone que contiene todas las unidades anteriores
+    //seguidos de la nueva.
+    siegueZone = siegueZone :+ card
   }
   
+  
   def setCardOnDistanceZone(card: DistanceUnit): Unit = {
-    distanceZone += card
+    distanceZone = distanceZone :+ card
   }
   
   def setCardOnMeleeZone(card: MeleeUnit): Unit = {
-    meleeZone += card
+    meleeZone = meleeZone :+ card
   }
 
   def setCardWeather(card: AbstractWeatherCard): Unit = {
@@ -68,14 +85,14 @@ class PlayerTable(){
       (this eq other) ||
         other.siegueZone == siegueZone &&
           other.distanceZone == distanceZone &&
-           other.meleeZone == meleeZone
+          other.meleeZone == meleeZone
     } else {
       false
     }
   }
 
   override def hashCode(): Int = {
-    Objects.hash(classOf[PlayerTable], siegueZone, distanceZone, meleeZone)
+    Objects.hash(classOf[PlayerTable],getSieugeZone,getMeleeZone,getDistanceZone)
   }
 
 }

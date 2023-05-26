@@ -4,6 +4,7 @@ package test
 import gwent.model.cards.effects.uniteffect.NullEffectUnit
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
 
+import cl.uchile.dcc.gwent.exceptions.InvalidStrengthValue
 import cl.uchile.dcc.gwent.model.cards.weathercards.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
 
 class CardTest extends munit.FunSuite {
@@ -129,6 +130,12 @@ class CardTest extends munit.FunSuite {
     assertEquals(NieblaImpenetrable.equals(EscarchaMordiente), false)
   }
 
+  test("trying to create a unit with negative strength"){
+    val caught = intercept[InvalidStrengthValue] {
+      val test = new SiegeUnit("test", -10, NullEffectUnit)
+    }
+    assert(caught.getMessage == "El valor de la fuerza no puede inicializado negativo")
+  }
 
 
 

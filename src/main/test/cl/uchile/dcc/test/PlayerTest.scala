@@ -1,6 +1,7 @@
 package cl.uchile.dcc
 package test
 
+import gwent.exceptions.InvalidGemsAmount
 import gwent.model.cards.ICard
 import gwent.model.cards.deck.Deck
 import gwent.model.cards.effects.uniteffect.NullEffectUnit
@@ -62,7 +63,7 @@ class PlayerTest extends munit.FunSuite {
   }
 
   test("hash code for players") {
-    player2.hashCode()
+    assert(player2.hashCode() != player1.hashCode())
   }
   test("showing the cards in the hand of a player") {
     player1.drawCard()
@@ -88,4 +89,18 @@ class PlayerTest extends munit.FunSuite {
    assertEquals(deck1.equals(deck2),false)
   }
 
+  test("checking if player still alive"){
+
+    assert(player2.isAlive())
+    player2.gems -= 3
+    assert(!player2.isAlive())
+  }
+
+  test("checking if player is initialized with negative gems"){
+
+    val caught = intercept[InvalidGemsAmount] {
+      val player = new Players("John", -10, deck1)
+    }
+    assert(caught.getMessage == "El numero de gemas no puede inicializado negativo")
+  }
 }
