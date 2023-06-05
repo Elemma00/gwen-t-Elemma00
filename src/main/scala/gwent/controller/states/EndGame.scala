@@ -1,6 +1,7 @@
 package cl.uchile.dcc
 package gwent.controller.states
 
-class EndGame {
+import gwent.controller.State
+class EndGame extends State{
 
 }

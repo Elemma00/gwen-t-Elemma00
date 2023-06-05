@@ -128,6 +128,7 @@ class CardTest extends munit.FunSuite {
 
   test("comparing different weather cards") {
     assertEquals(NieblaImpenetrable.equals(EscarchaMordiente), false)
+    assertEquals(NieblaImpenetrable.equals(1), false)
   }
 
   test("trying to create a unit with negative strength"){

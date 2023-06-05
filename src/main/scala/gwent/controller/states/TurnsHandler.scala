@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package gwent.controller.states
-
-class TurnsHandler {
+import gwent.controller.State
+class TurnsHandler extends State{
 
 }

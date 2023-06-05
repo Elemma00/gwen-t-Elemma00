@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package gwent.controller.states
-
-class NextPlayerTurnNoLimits {
+import gwent.controller.State
+class NextPlayerTurnNoLimits extends State{
 
 }

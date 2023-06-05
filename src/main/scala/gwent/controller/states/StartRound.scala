@@ -1,6 +1,7 @@
 package cl.uchile.dcc
 package gwent.controller.states
+import gwent.controller.State
 
-class StartRound {
+class StartRound extends State{
 
 }

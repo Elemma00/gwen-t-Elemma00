@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package gwent.controller.states
-
-class RoundDecision {
+import gwent.controller.State
+class RoundDecision extends State {
 
 }

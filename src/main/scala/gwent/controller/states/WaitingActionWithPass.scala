@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package gwent.controller.states
-
-class WaitingActionWithPass {
+import gwent.controller.State
+class WaitingActionWithPass extends State {
 
 }
