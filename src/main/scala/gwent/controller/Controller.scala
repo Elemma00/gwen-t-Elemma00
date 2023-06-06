@@ -16,6 +16,8 @@ class Controller(){
 
   def chooseFirstPlayer(): Unit = state.chooseFirstPlayer(this)
 
+  def changePlayer(): Unit =  state.changePlayer(this)
+
   def setHands(): Unit = state.setHands(this)
 
   def playCard(): Unit = state.playCard(this)
@@ -33,4 +35,28 @@ class Controller(){
   def endRound(): Unit = state.endRound(this)
 
   def winner(): Unit = state.winner(this)
+
+
+  def isStartGame(): Boolean = state.isStartGame()
+
+  def isChoosingFirstPlayer(): Boolean = state.isChoosingFirstPlayer()
+
+  def isFirstRound(): Boolean = state.isFirstRound()
+
+  def isWaitingAction(): Boolean = state.isWaitingAction()
+
+  def isStartRound(): Boolean = state.isStartRound()
+
+  def isTurnsHandler(): Boolean = state.isTurnsHandler()
+
+  def isNextPlayerTurn(): Boolean = state.isNextPlayerTurn()
+
+  def isNextPlayerTurnNoLimits(): Boolean = state.isNextPlayerTurnNoLimits()
+
+  def isWaitingActionWithPass(): Boolean = state.isWaitingActionWithPass()
+
+  def isRoundDecision(): Boolean = state.isRoundDecision()
+
+  def isEndGame(): Boolean = state.isEndGame()
+
 }
