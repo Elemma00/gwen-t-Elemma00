@@ -18,6 +18,17 @@ class GeneralTable(val tablePlayer1: PlayerTable, val tablePlayer2: PlayerTable)
     weatherZone = card
   }
 
+  def showAll(): Unit = {
+    println("\ntabla Jugador 1")
+    tablePlayer1.showMyTable()
+    println("\ntabla Jugador 2")
+    tablePlayer2.showMyTable()
+    if(weatherZone != null) {
+      println(s"\nNombre de Carta Clima: ${weatherZone.name}")
+    }else{
+      println("\n No hay una carta Clima en el tablero")
+    }
+  }
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[GeneralTable]) {
       val other = o.asInstanceOf[GeneralTable]

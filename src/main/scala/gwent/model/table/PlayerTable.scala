@@ -23,14 +23,29 @@ class PlayerTable(){
   // Campo para el jugador
   private var siegueZone = List.empty[SiegeUnit]
   private var distanceZone = List.empty[DistanceUnit]
-  protected var meleeZone = List.empty[MeleeUnit]
+  private var meleeZone = List.empty[MeleeUnit]
   protected var asociatedTable: GeneralTable = _
+  
+  
+  
+  def updateMelee(o:ICard): Unit = {
+    o.applyCardEffect()
+  }
+  def updateDistance (o:ICard): Unit = {
+    o.applyCardEffect()
+  }
+  def updateSieuge (o:ICard): Unit = {
+    o.applyCardEffect()
+  }
 
+  def updateWeather(o:ICard): Unit = {
+    o.applyCardEffect()
+  }
   def start(generalTable: GeneralTable) : Unit = {
     asociatedTable = generalTable
   }
-
-  def getSieugeZone = siegueZone
+  
+  def getSiegueZone = siegueZone
   
   def getDistanceZone = distanceZone
   
@@ -39,7 +54,7 @@ class PlayerTable(){
   
   //Método para colocar una carta en el campo del player (double dispatch)
   def setCardOnTable(card:ICard): Unit = {
-     card.placeOnTable(this)
+     card.placeOnTable()
   }
 
   def setCardOnSiegueZone(card: SiegeUnit) : Unit = {
@@ -71,7 +86,7 @@ class PlayerTable(){
     meleeZone.foreach{
       carta => println(carta.toString)
     }
-    println("***** Zone de Distancia *****")
+    println("***** Zona de Distancia *****")
     distanceZone.foreach{
       carta => println(carta.toString)
     }
@@ -92,7 +107,7 @@ class PlayerTable(){
   }
 
   override def hashCode(): Int = {
-    Objects.hash(classOf[PlayerTable],getSieugeZone,getMeleeZone,getDistanceZone)
+    Objects.hash(classOf[PlayerTable],getSiegueZone,getMeleeZone,getDistanceZone)
   }
 
 }

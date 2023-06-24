@@ -5,6 +5,7 @@ import gwent.model.cards.ICard
 import gwent.model.cards.deck.Deck
 
 import cl.uchile.dcc.gwent.exceptions.InvalidGemsAmount
+import cl.uchile.dcc.gwent.model.table.PlayerTable
 
 import java.util.Objects
 
@@ -20,7 +21,7 @@ import java.util.Objects
  *
  */
 
-class Players(val name: String, var gems: Int, private val deck: Deck) {
+class Players(val name: String, var gems: Int, private val deck: Deck, pTable: PlayerTable) {
   
     try {
       if (gems < 0) {
@@ -45,10 +46,11 @@ class Players(val name: String, var gems: Int, private val deck: Deck) {
 
   // this method is for play a card
   def playCard(indexCard: Int): Unit = {
-    var listadisponible = onHandCards.getList
-    var cardPlayed = listadisponible.apply(indexCard)
+    val listadisponible = onHandCards.getList
+    val cardPlayed = listadisponible.apply(indexCard)
+    cardPlayed.play(pTable)
     onHandCards.setList(onHandCards.getList.filter(_ != cardPlayed)) // actualizo las cartas en mi mano
-    cardPlayed.play()
+    
   }
 
   // draw a card of the deck and put in on hand

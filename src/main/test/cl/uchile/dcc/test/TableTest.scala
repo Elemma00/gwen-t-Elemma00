@@ -43,6 +43,9 @@ class TableTest extends munit.FunSuite {
   }
 
   test("placing some units on table"){
+    Melee1.registerTable(tablaJugador2)
+    Distance1.registerTable(tablaJugador1)
+    Siegue1.registerTable(tablaJugador2)
     tablaJugador2.setCardOnTable(Melee1)
     tablaJugador1.setCardOnTable(Distance1)
     tablaJugador2.setCardOnTable(Siegue1)
@@ -58,9 +61,10 @@ class TableTest extends munit.FunSuite {
   }
 
   test("test hashcode of PlayerTable"){
+    Melee1.registerTable(tablaJugador2)
     tablaJugador2.setCardOnTable(Melee1)
     assert(tablaJugador2.hashCode() != tablaJugador1.hashCode())
-    assert(tablaJugador2.getSieugeZone == tablaJugador3.getSieugeZone)
+    assert(tablaJugador2.getSiegueZone == tablaJugador3.getSiegueZone)
     assert(tablaJugador2.getDistanceZone == tablaJugador3.getDistanceZone)
     assert(tablaJugador2.getMeleeZone != tablaJugador3.getMeleeZone)
   }
@@ -75,6 +79,10 @@ class TableTest extends munit.FunSuite {
   test("setting a climate card"){
     tablaGeneral.setWeatherCard(NieblaImpenetrable)
     println(tablaGeneral.weatherZone.toString)
+  }
 
+  test("equals with any object"){
+    tablaJugador1.equals(1)
+    tablaJugador2.equals("sd;kfjokdsjf")
   }
 }

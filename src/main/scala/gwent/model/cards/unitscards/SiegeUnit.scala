@@ -5,6 +5,8 @@ import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 import gwent.model.cards.unitscards.AbstractUnitCard
 import gwent.model.table.PlayerTable
 
+import cl.uchile.dcc.gwent.model.cards.effects.Effect
+
 import java.util.Objects
 
 
@@ -19,8 +21,22 @@ import java.util.Objects
 class SiegeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
 
-  override def placeOnTable(table: PlayerTable): Unit = {
+  override def notifyTable(): Unit = {
+    table.updateSieuge(this)
+  }
+  override def placeOnTable(): Unit = {
     table.setCardOnSiegueZone(this)
+    notifyTable()
+  }
+
+  // this method calls the effect to apply it-self (single-dispatch)
+  override def applyCardEffect(): Unit = {
+    effect.applyEffect(this,table)
+  }
+  
+
+  override def lineEffect(effect: Effect): Unit = {
+    effect.siegueUnitEffect(table.getSiegueZone)
   }
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[SiegeUnit]) {

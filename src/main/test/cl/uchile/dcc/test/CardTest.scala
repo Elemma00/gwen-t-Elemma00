@@ -1,11 +1,12 @@
 package cl.uchile.dcc
 package test
 
-import gwent.model.cards.effects.uniteffect.NullEffectUnit
+import gwent.exceptions.InvalidStrengthValue
+import gwent.model.cards.effects.uniteffect.{NullEffectUnit, VinculoEstrecho}
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
+import gwent.model.cards.weathercards.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
 
-import cl.uchile.dcc.gwent.exceptions.InvalidStrengthValue
-import cl.uchile.dcc.gwent.model.cards.weathercards.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
+import cl.uchile.dcc.gwent.model.table.PlayerTable
 
 class CardTest extends munit.FunSuite {
   var Siegue1: SiegeUnit = _
@@ -21,7 +22,10 @@ class CardTest extends munit.FunSuite {
   var Melee3: MeleeUnit = _
   var Melee4: MeleeUnit = _
 
+  var tabla: PlayerTable = _
   override def beforeEach(context: BeforeEach): Unit = {
+
+    tabla = new PlayerTable()
 
     Siegue1 = new SiegeUnit("siegue1", 5,NullEffectUnit)
     Siegue2 = new SiegeUnit("siegue2", 5,NullEffectUnit)
@@ -60,7 +64,7 @@ class CardTest extends munit.FunSuite {
   }
 
   test("playing a SiegueUnit without effects"){
-    Siegue1.play()
+    Siegue1.play(tabla)
   }
 
   test("equal DistanceUnit addresses") {
@@ -76,7 +80,7 @@ class CardTest extends munit.FunSuite {
   }
 
   test("playing a DistanceUnit without effects") {
-    Distance1.play()
+    Distance1.play(tabla)
   }
   test("equal MeleeUnit addresses") {
     assertEquals(Melee1.equals(Melee1), true)
@@ -91,7 +95,7 @@ class CardTest extends munit.FunSuite {
   }
 
   test("playing a MeleeUnit without effects") {
-    Melee1.play()
+    Melee1.play(tabla)
   }
 
   test("hashing coding"){
@@ -100,7 +104,10 @@ class CardTest extends munit.FunSuite {
     Siegue2.hashCode()
   }
 
-  test("using super"){
+  test("equals with any object"){
+    Melee1.equals(1)
+    Distance1.equals("hola")
+    Siegue3.equals(54)
 
   }
 
@@ -118,12 +125,12 @@ class CardTest extends munit.FunSuite {
     ClimaDespejado.hashCode()
   }
 
+  test("line effect"){
+    Distance1.registerTable(tabla)
+    Distance1.lineEffect(VinculoEstrecho)
+  }
   test("to string method"){
     assertEquals(NieblaImpenetrable.toString(), "name: Niebla Impenetrable effect: Niebla Impenetrable")
-  }
-
-  test("playing weather cards"){
-    NieblaImpenetrable.play()
   }
 
   test("comparing different weather cards") {

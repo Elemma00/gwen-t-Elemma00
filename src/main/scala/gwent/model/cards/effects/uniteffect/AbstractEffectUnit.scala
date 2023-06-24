@@ -3,6 +3,8 @@ package gwent.model.cards.effects.uniteffect
 
 import gwent.model.cards.effects.Effect
 
+import cl.uchile.dcc.gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
+
 import java.util.Objects
 
 
@@ -15,6 +17,10 @@ import java.util.Objects
  */
 abstract class AbstractEffectUnit(val name: String) extends Effect {
   def getName: String = name
+
+  override def distanceUnitEffect(list: List[DistanceUnit]): Unit = println("Do Nothing")
+  override def meleeUnitEffect(list: List[MeleeUnit]): Unit = println("Do Nothing")
+  override def siegueUnitEffect(list: List[SiegeUnit]): Unit = println("Do Nothing")
   
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[AbstractEffectUnit]) {

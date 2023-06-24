@@ -3,6 +3,7 @@ package gwent.model.cards.unitscards
 
 import gwent.exceptions.InvalidStrengthValue
 import gwent.model.cards.ICard
+import gwent.model.cards.effects.Effect
 import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 import gwent.model.table.PlayerTable
 
@@ -12,9 +13,12 @@ import java.util.Objects
  *
  * a Unit card is defined by a name, strength and its effect
  *
- * @param name     name of the Unit
- * @param strength strength points
- * @param effect   the card's effect
+ * @param name      name of the Unit
+ * @param strength  strength points
+ * @param effect    the card's effect
+ * @param table     the associated played table
+ * @param currentStrength  current strength points
+ * @param strengthWithoutWeather  strength points without considering the weather card buff
  * @author Elemma00
  */
 
@@ -22,22 +26,26 @@ import java.util.Objects
 abstract class AbstractUnitCard (val name: String, val strength: Int, protected val effect: AbstractEffectUnit)
   extends ICard {
 
+  var table: PlayerTable = _
+  var currentStrength: Int = strength
+  var strengthWithoutWeather = strength
+  var buffWeather: Int = 0
+  override def registerTable(o: PlayerTable): Unit = {
+    table = o
+  }
+
   try {
     if (strength < 0) {
       throw new InvalidStrengthValue("El valor de la fuerza no puede inicializado negativo")
     }
   }
-  
-  // this method calls the effect to apply it-self (single-dispatch)
-  override def applyCardEffect(): Unit = {
-    effect.applyEffect()
-  }
 
-  override def play(/* posicion en tabla: Int */): Unit = {
-    //placeOnTable()
-    applyCardEffect()
+  def play(tabla:PlayerTable): Unit = {
+    registerTable(tabla)
+    placeOnTable()
   }
+  override def getName(): String = name
   override def toString: String = {
-    s"name: $name strength: $strength effect: ${effect.getName}"
+    s"Name: $name CurrentStrength: $currentStrength Strength: $strength Effect: ${effect.getName}"
   }
 }

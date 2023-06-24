@@ -44,4 +44,10 @@ Acá se adjunta el diagrama de estados que seguirá:
 ![Diagrama de estados](docs/diagrama-estados.png)
 
 
+# Tarea 3 / Entrega Parcial 5
+Para esta entrega se han implementado los efectos mediante el uso de Observer Pattern, en el cual la tabla es
+el observador y las cartas son las observadas, cada vez que se juega una carta se notifica al tablero de que
+se debe aplicar el efecto que posee esta carta. 
 
+Además, se han corregido algunas cosas para el correcto funcionamiento de los efectos, diferenciando entre
+los boosters que se reciben por parte de una carta de unidad o por una carta de clima.

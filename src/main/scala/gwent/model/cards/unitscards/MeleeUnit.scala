@@ -5,6 +5,8 @@ import gwent.model.cards.effects.uniteffect.AbstractEffectUnit
 import gwent.model.cards.unitscards.AbstractUnitCard
 import gwent.model.table.PlayerTable
 
+import cl.uchile.dcc.gwent.model.cards.effects.Effect
+
 import java.util.Objects
 
 /** A class representing a Melee Unit Card
@@ -19,11 +21,22 @@ import java.util.Objects
 
 class MeleeUnit(name: String, strength: Int, effect: AbstractEffectUnit)
   extends AbstractUnitCard(name, strength, effect) {
-
-  override def placeOnTable(table: PlayerTable): Unit = {
-    table.setCardOnMeleeZone(this)
+  
+  override def notifyTable(): Unit = {
+    table.updateMelee(this)
   }
-
+  override def placeOnTable(): Unit = {
+    table.setCardOnMeleeZone(this)
+    notifyTable()
+  }
+  
+  // this method calls the effect to apply it-self (single-dispatch)
+  override def applyCardEffect(): Unit = {
+    effect.applyEffect(this,table)
+  }
+  override def lineEffect(effect: Effect): Unit = {
+    effect.meleeUnitEffect(table.getMeleeZone)
+  }
   override def equals(o: Any): Boolean = {
     if (o.isInstanceOf[MeleeUnit]) {
       val other = o.asInstanceOf[MeleeUnit]

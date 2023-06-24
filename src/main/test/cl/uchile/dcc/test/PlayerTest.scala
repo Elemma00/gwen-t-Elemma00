@@ -8,6 +8,8 @@ import gwent.model.cards.effects.uniteffect.NullEffectUnit
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
 import gwent.model.player.Players
 
+import cl.uchile.dcc.gwent.model.table.{GeneralTable, PlayerTable}
+
 
 class PlayerTest extends munit.FunSuite {
 
@@ -20,12 +22,19 @@ class PlayerTest extends munit.FunSuite {
   var distanceUnit1: DistanceUnit = _
   var meleeGenerico1: MeleeUnit = _
   var meleeGenerico2: MeleeUnit = _
+  var tablaJugador1: PlayerTable = _
+  var tablaJugador2: PlayerTable = _
+  var tablaJugador3: PlayerTable = _
+  var tablaGeneral: GeneralTable = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     siegue1 = new SiegeUnit("SiegeGenerico", 10, NullEffectUnit)
     distanceUnit1 = new DistanceUnit("DistanceGenerico", 10, NullEffectUnit)
     meleeGenerico1 = new MeleeUnit("MeleeGenerico1", 20, NullEffectUnit)
     meleeGenerico2 = new MeleeUnit("MeleeGenerico2", 20, NullEffectUnit)
+    tablaJugador1 = new PlayerTable()
+    tablaJugador2 = new PlayerTable()
+    tablaJugador3 = new PlayerTable()
 
     val lista1: List[ICard] = List(siegue1, distanceUnit1)
     val lista2: List[ICard] = List(meleeGenerico1, meleeGenerico2)
@@ -33,9 +42,11 @@ class PlayerTest extends munit.FunSuite {
     deck1 = new Deck(lista1)
     deck2 = new Deck(lista2)
 
-    player1 = new Players("nombrexd", 2, deck1)
-    player2 = new Players("player2", 2, deck2)
-    player3 = new Players("player2", 2, deck2)
+    player1 = new Players("nombrexd", 2, deck1, tablaJugador1)
+    player2 = new Players("player2", 2, deck2, tablaJugador2)
+    player3 = new Players("player2", 2, deck2, tablaJugador3)
+
+    tablaGeneral = new GeneralTable(tablaJugador1,tablaJugador2)
 
   }
 
@@ -99,7 +110,7 @@ class PlayerTest extends munit.FunSuite {
   test("checking if player is initialized with negative gems"){
 
     val caught = intercept[InvalidGemsAmount] {
-      val player = new Players("John", -10, deck1)
+      val player = new Players("John", -10, deck1, tablaJugador1)
     }
     assert(caught.getMessage == "El numero de gemas no puede inicializado negativo")
   }
