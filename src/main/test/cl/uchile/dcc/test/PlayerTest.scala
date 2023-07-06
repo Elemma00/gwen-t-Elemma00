@@ -47,7 +47,7 @@ class PlayerTest extends munit.FunSuite {
     player3 = new Players("player2", 2, deck2, tablaJugador3)
 
     tablaGeneral = new GeneralTable(tablaJugador1,tablaJugador2)
-
+    
   }
 
 

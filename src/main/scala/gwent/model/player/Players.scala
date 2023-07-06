@@ -1,11 +1,10 @@
 package cl.uchile.dcc
 package gwent.model.player
 
+import gwent.exceptions.InvalidGemsAmount
 import gwent.model.cards.ICard
 import gwent.model.cards.deck.Deck
-
-import cl.uchile.dcc.gwent.exceptions.InvalidGemsAmount
-import cl.uchile.dcc.gwent.model.table.PlayerTable
+import gwent.model.table.PlayerTable
 
 import java.util.Objects
 
@@ -44,13 +43,15 @@ class Players(val name: String, var gems: Int, private val deck: Deck, pTable: P
     deck.showcards()
   }
 
+  def sendMyCountGems(): Unit ={
+    pTable.checkingGemsPlayer(this)
+  }
   // this method is for play a card
   def playCard(indexCard: Int): Unit = {
     val listadisponible = onHandCards.getList
     val cardPlayed = listadisponible.apply(indexCard)
     cardPlayed.play(pTable)
     onHandCards.setList(onHandCards.getList.filter(_ != cardPlayed)) // actualizo las cartas en mi mano
-    
   }
 
   // draw a card of the deck and put in on hand
@@ -61,6 +62,10 @@ class Players(val name: String, var gems: Int, private val deck: Deck, pTable: P
 
   def shuffleDeck():Unit={
     deck.suffle()
+  }
+
+  def receiveDamage(): Unit ={
+    gems -= 1
   }
   
   override def equals(o: Any): Boolean = {
@@ -79,5 +84,6 @@ class Players(val name: String, var gems: Int, private val deck: Deck, pTable: P
     Objects.hash(classOf[Players], name, gems, deck)
   }
 
+  override def toString: String = s"Nombre Jugador: $name , Gemas: $gems"
 
 }

@@ -25,9 +25,7 @@ class PlayerTable(){
   private var distanceZone = List.empty[DistanceUnit]
   private var meleeZone = List.empty[MeleeUnit]
   protected var asociatedTable: GeneralTable = _
-  
-  
-  
+
   def updateMelee(o:ICard): Unit = {
     o.applyCardEffect()
   }
@@ -44,7 +42,20 @@ class PlayerTable(){
   def start(generalTable: GeneralTable) : Unit = {
     asociatedTable = generalTable
   }
-  
+
+  def calculateTotalStrength(): Int = {
+    val totalMeleeUnit: Int = meleeZone.foldLeft(0)((acc, e) => acc + e.currentStrength)
+    val totalSiegueUnit: Int = siegueZone.foldLeft(0)((acc, e) => acc + e.currentStrength)
+    val totalDistanceUnit: Int = distanceZone.foldLeft(0)((acc, e) => acc + e.currentStrength)
+    val total = totalMeleeUnit + totalSiegueUnit + totalDistanceUnit
+    total
+  }
+  def checkingGemsPlayer(player: Players): Boolean = {
+    if(player.gems == 0){
+      println(s"El jugador '${player.name}' ha perdido")
+    }
+    player.isAlive()
+  }
   def getSiegueZone = siegueZone
   
   def getDistanceZone = distanceZone

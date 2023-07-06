@@ -83,6 +83,6 @@ class TableTest extends munit.FunSuite {
 
   test("equals with any object"){
     tablaJugador1.equals(1)
-    tablaJugador2.equals("sd;kfjokdsjf")
+    tablaJugador2.equals("sdkfjokdsjf")
   }
 }

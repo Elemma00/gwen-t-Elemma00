@@ -32,7 +32,8 @@ class State {
   def isWaitingActionWithPass():Boolean =  false
   def isRoundDecision():Boolean = false
   def isEndGame():Boolean = false
-
+  
+  
 
 
 }

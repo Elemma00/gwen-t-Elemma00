@@ -1,7 +1,9 @@
 package cl.uchile.dcc
 package gwent.controller
 
-trait Observer {
+import gwent.model.table.GeneralTable
 
-  def update()
+trait ControllerObserver {
+
+  def update(generalTable: GeneralTable): Unit = {}
 }

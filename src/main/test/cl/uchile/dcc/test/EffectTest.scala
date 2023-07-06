@@ -1,10 +1,12 @@
 package cl.uchile.dcc
 package test
 
+import gwent.model.cards.deck.Deck
 import gwent.model.cards.effects.uniteffect.{NullEffectUnit, RefuerzoMoral, VinculoEstrecho}
 import gwent.model.cards.effects.weathereffect.{ClimaDespejadoEffect, EscarchaMordienteEffect, LluviaTorrencialEffect, NieblaImpenetrableEffect}
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
-import gwent.model.cards.weathercards.{ClimaDespejado, NieblaImpenetrable, LluviaTorrencial, EscarchaMordiente}
+import gwent.model.cards.weathercards.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
+import gwent.model.player.Players
 import gwent.model.table.{GeneralTable, PlayerTable}
 
 class EffectTest extends munit.FunSuite {
@@ -20,9 +22,14 @@ class EffectTest extends munit.FunSuite {
   var Melee2: MeleeUnit = _
   var Dummy: MeleeUnit = _
 
+
+
   override def beforeEach(context: BeforeEach): Unit = {
+
+
     tablaJugador1 = new PlayerTable()
     tablaJugador2 = new PlayerTable()
+
     tablaGeneral = new GeneralTable(tablaJugador1, tablaJugador2)
     tablaJugador1.start(tablaGeneral)
     tablaJugador2.start(tablaGeneral)

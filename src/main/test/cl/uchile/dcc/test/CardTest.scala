@@ -2,11 +2,12 @@ package cl.uchile.dcc
 package test
 
 import gwent.exceptions.InvalidStrengthValue
+import gwent.model.cards.deck.Deck
 import gwent.model.cards.effects.uniteffect.{NullEffectUnit, VinculoEstrecho}
 import gwent.model.cards.unitscards.{DistanceUnit, MeleeUnit, SiegeUnit}
 import gwent.model.cards.weathercards.{ClimaDespejado, EscarchaMordiente, LluviaTorrencial, NieblaImpenetrable}
-
-import cl.uchile.dcc.gwent.model.table.PlayerTable
+import gwent.model.player.Players
+import gwent.model.table.PlayerTable
 
 class CardTest extends munit.FunSuite {
   var Siegue1: SiegeUnit = _
@@ -21,12 +22,10 @@ class CardTest extends munit.FunSuite {
   var Melee2: MeleeUnit = _
   var Melee3: MeleeUnit = _
   var Melee4: MeleeUnit = _
-
+  
   var tabla: PlayerTable = _
   override def beforeEach(context: BeforeEach): Unit = {
-
-    tabla = new PlayerTable()
-
+    
     Siegue1 = new SiegeUnit("siegue1", 5,NullEffectUnit)
     Siegue2 = new SiegeUnit("siegue2", 5,NullEffectUnit)
     Siegue3 = new SiegeUnit("siegue2", 5,NullEffectUnit)
@@ -41,7 +40,9 @@ class CardTest extends munit.FunSuite {
     Melee2 = new MeleeUnit("Melee2", 5,NullEffectUnit)
     Melee3 = new MeleeUnit("Melee2", 5,NullEffectUnit)
     Melee4 = new MeleeUnit("Melee1", 2,NullEffectUnit)
-
+    
+    tabla = new PlayerTable()
+    
 
   }
 
