@@ -16,7 +16,7 @@ import java.util.Objects
  * @param name player's name
  * @param gems amount of gems
  * @param deck a list of cards that the user have
- *
+ * @param pTable the asociated table 
  *
  */
 

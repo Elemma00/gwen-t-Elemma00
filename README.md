@@ -51,3 +51,10 @@ se debe aplicar el efecto que posee esta carta.
 
 Además, se han corregido algunas cosas para el correcto funcionamiento de los efectos, diferenciando entre
 los boosters que se reciben por parte de una carta de unidad o por una carta de clima.
+
+# Tarea 3 / Entrega Parcial 6
+
+Para esta entrega parcial, se ha utilizado el patrón de diseño Observer para notificar al controlador 
+de los diferentes eventos que ocurran en el juego. Cuando un jugador tiene su contador de gemas en 0 esto hace 
+que el tablero general le avisa al controlador de esto. Finalmente gracias a que se notificó, el controlador
+cambia su estado a End Game y se imprime un mensaje indicando el jugador que perdió y además que el juego ha terminado.
