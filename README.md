@@ -59,9 +59,9 @@ de los diferentes eventos que ocurran en el juego. Cuando un jugador tiene su co
 que el tablero general le avisa al controlador de esto. Finalmente gracias a que se notificó, el controlador
 cambia su estado a End Game y se imprime un mensaje indicando el jugador que perdió y además que el juego ha terminado.
 
-# Tarea 3
-En esta entrega se han pulido los últimos detalles en lo que respecta al modelo del juego, por falta de tiempo 
+# Tarea 3 / Entrega Final
+En esta entrega se han pulido los últimos detalles en lo que respecta al modelo del juego, por falta de tiempo
 no he podido completar una vista para un usuario y poder jugar. Todo está listo para ser implementado de forma directa
 en una UI con sus respectivas funciones , incluyendo los efectos y las cadenas de efectos que podrían eventualmente
-ocurrir en el juego, también quedo un sistema de notificaciones extensible para cualquier tipo de evento o 
+ocurrir en el juego, también quedo un sistema de notificaciones extensible para cualquier tipo de evento o
 contexto.
