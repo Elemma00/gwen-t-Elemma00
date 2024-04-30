@@ -13,4 +13,12 @@ This project's goal is to create a (simplified) clone of the
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
+**Gwen't es una versión copia y simplificada del juego Gwent desarollado por CD PROJEKT RED**
+**REALIZADO CON FINES ACADÉMICOS Y EDUCACIONALES**
+
+En este juego se ponen en práctica lo aprendido en el curso "Metodologías de Diseño y Programación" CC3002 del semestre de otoño 2023.
+* Se aplicaron buenas prácticas de programación.
+* Aplicación de patrones de diseño y Principio de sustitución de Liskov.
+* Diseño de diagrama de clases.
+* Implementación de arquitectura MVC.
+  
